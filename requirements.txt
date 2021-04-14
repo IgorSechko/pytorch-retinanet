@@ -1,0 +1,9 @@
+pandas
+pycocotools
+opencv-python
+requests
+scikit-image
+torch
+torchvision
+tqdm
+tensorboard

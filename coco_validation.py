@@ -14,8 +14,12 @@ print('CUDA available: {}'.format(torch.cuda.is_available()))
 def main(args=None):
     parser = argparse.ArgumentParser(description='Simple training script for training a RetinaNet network.')
 
-    parser.add_argument('--coco_path', help='Path to COCO directory')
-    parser.add_argument('--model_path', help='Path to model', type=str)
+    parser.add_argument('--model_path',
+                        default='/mnt/disk1/Projects/pytorch-retinanet/coco_resnet_50_map_0_335_state_dict.pt',
+                        help='Path to model', type=str)
+    parser.add_argument('--coco_path',
+                        default='/mnt/disk1/COCO/',
+                        help='Path to COCO directory')
 
     parser = parser.parse_args(args)
 

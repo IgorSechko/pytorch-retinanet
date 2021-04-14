@@ -26,8 +26,8 @@ print('CUDA available: {}'.format(torch.cuda.is_available()))
 def main(args=None):
 	parser = argparse.ArgumentParser(description='Simple training script for training a RetinaNet network.')
 
-	parser.add_argument('--dataset', help='Dataset type, must be one of csv or coco.')
-	parser.add_argument('--coco_path', help='Path to COCO directory')
+	parser.add_argument('--dataset', default='coco', help='Dataset type, must be one of csv or coco.')
+	parser.add_argument('--coco_path', default='/home/ITRANSITION.CORP/v.shamkina/Pictures/COCO/', help='Path to COCO directory')
 	parser.add_argument('--csv_classes', help='Path to file containing class list (see readme)')
 	parser.add_argument('--csv_val', help='Path to file containing validation annotations (optional, see readme)')
 
@@ -54,9 +54,10 @@ def main(args=None):
 			retinanet = retinanet.cuda()
 
 	if torch.cuda.is_available():
-		retinanet = torch.nn.DataParallel(retinanet).cuda()
+            retinanet.load_state_dict(torch.load(parser.model_path))
+	    retinanet = torch.nn.DataParallel(retinanet).cuda()
 	else:
-		retinanet = torch.nn.DataParallel(retinanet)
+	    retinanet = torch.nn.DataParallel(retinanet)
 
 	retinanet.eval()
 
